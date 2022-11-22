@@ -1,0 +1,23 @@
+//*************************************************************************************************/
+//   Projeto    : Teste KeyToIno
+//   Arquivo    : KeyToIno.ino
+//   Descrição  : Acende o led do Arduino, ao pressionar a tecla F1 do PC
+//   Data       : 28/04/2019
+//*************************************************************************************************/
+
+#include "KeyToIno.h"       //Inclusão da biblioteca necessária para o uso do software
+
+KeyToIno meuTeclado;        //Instância declarada para representar o teclado do computador
+
+void setup()
+{
+    meuTeclado.begin(9600);         //Inicializa a porta serial do Arduino com a velocidade de 9600
+    pinMode(LED_BUILTIN, OUTPUT);   //Configura o pino do led da placa, como saída
+}
+
+void loop()
+{
+    meuTeclado.readKeys();                          //Faz a leitura das teclas do teclado
+    bool F1_press = meuTeclado.isPressed(KEY_F1);   //Verifica se a tecla F1 está pressionada
+    digitalWrite(LED_BUILTIN, F1_press);            //Escreve o sinal que leu a tecla F1, no led da placa
+}
